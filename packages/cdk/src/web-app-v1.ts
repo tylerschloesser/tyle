@@ -1,6 +1,5 @@
 import { App } from 'aws-cdk-lib'
 import { BehaviorOptions } from 'aws-cdk-lib/aws-cloudfront'
-import { Construct } from 'constructs'
 import { CdnCertificateStack } from './cdn-certificate-stack.js'
 import { CdnStack } from './cdn-stack.js'
 import { DnsStack } from './dns-stack.js'
@@ -15,7 +14,7 @@ export interface WebAppV1Props {
   additionalBehaviors?: Record<string, BehaviorOptions>
 }
 
-export class WebAppV1 extends Construct {
+export class WebAppV1 {
   readonly stack: Readonly<{
     dns: DnsStack
     cdnCertificate: CdnCertificateStack
@@ -23,8 +22,7 @@ export class WebAppV1 extends Construct {
   }>
 
   constructor(
-    scope: App,
-    id: string,
+    app: App,
     {
       stackIdPrefix,
       account,
@@ -34,12 +32,10 @@ export class WebAppV1 extends Construct {
       additionalBehaviors,
     }: WebAppV1Props,
   ) {
-    super(scope, id)
-
     const stackId = (suffix: string) =>
       [stackIdPrefix, suffix].join('-')
 
-    const dns = new DnsStack(this, stackId('DNS'), {
+    const dns = new DnsStack(app, stackId('DNS'), {
       domain,
       env: {
         account,
@@ -49,7 +45,7 @@ export class WebAppV1 extends Construct {
     })
 
     const cdnCertificate = new CdnCertificateStack(
-      this,
+      app,
       stackId('CDN-Certificate'),
       {
         domain,
@@ -62,7 +58,7 @@ export class WebAppV1 extends Construct {
       },
     )
 
-    const cdn = new CdnStack(this, stackId('CDN'), {
+    const cdn = new CdnStack(app, stackId('CDN'), {
       domain,
       env: {
         account,
