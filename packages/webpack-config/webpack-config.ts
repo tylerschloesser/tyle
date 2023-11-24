@@ -4,11 +4,11 @@ import * as url from 'url'
 import { Configuration } from 'webpack'
 import 'webpack-dev-server'
 
-export function getWebpackConfig(): Configuration {
+export function webpackConfig(): Configuration {
   return {
     stats: 'minimal',
     mode: 'development',
-    entry: './src/index-dev.tsx',
+    entry: './src/index.tsx',
     devtool: 'eval-cheap-module-source-map',
     output: {
       publicPath: '/',

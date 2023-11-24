@@ -1,1 +1,1 @@
-export { getWebpackConfig } from './webpack-config.js'
+export { webpackConfig } from './webpack-config.js'

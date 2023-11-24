@@ -1,8 +1,5 @@
 {
   "name": "@tyle/tsconfig",
   "version": "1.0.0",
-  "type": "module",
-  "files": [
-    "tsconfig.json"
-  ]
+  "type": "module"
 }
