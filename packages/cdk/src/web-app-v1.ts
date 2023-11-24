@@ -1,4 +1,5 @@
 import { App } from 'aws-cdk-lib'
+import { BehaviorOptions } from 'aws-cdk-lib/aws-cloudfront'
 import { Construct } from 'constructs'
 import { CdnCertificateStack } from './cdn-certificate-stack.js'
 import { CdnStack } from './cdn-stack.js'
@@ -11,6 +12,7 @@ export interface WebAppV1Props {
   domain: Domain
   region: Region
   distPath: string
+  additionalBehaviors?: Record<string, BehaviorOptions>
 }
 
 export class WebAppV1 extends Construct {
@@ -29,6 +31,7 @@ export class WebAppV1 extends Construct {
       domain,
       region,
       distPath,
+      additionalBehaviors,
     }: WebAppV1Props,
   ) {
     super(scope, id)
@@ -69,6 +72,7 @@ export class WebAppV1 extends Construct {
       appHostedZone: dns.appHostedZone,
       certificate: cdnCertificate.certificate,
       distPath,
+      additionalBehaviors,
     })
 
     this.stack = { dns, cdnCertificate, cdn }
