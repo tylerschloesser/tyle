@@ -1,5 +1,5 @@
 {
-  "name": "@tsch/webpack-config",
+  "name": "@tyle/webpack-config",
   "version": "1.0.0",
   "type": "module",
   "dependencies": {

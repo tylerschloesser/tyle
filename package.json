@@ -1,5 +1,5 @@
 {
-  "name": "@tsch/root",
+  "name": "@tyle/root",
   "workspaces": [
     "packages/cdk",
     "packages/tsconfig",

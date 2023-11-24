@@ -1,5 +1,5 @@
 {
-  "name": "@tsch/cdk",
+  "name": "@tyle/cdk",
   "version": "1.0.0",
   "exports": "./src/index.ts",
   "type": "module",
@@ -11,6 +11,6 @@
     "constructs": "^10.3.0"
   },
   "dependencies": {
-    "@tsch/tsconfig": "^1.0.0"
+    "@tyle/tsconfig": "^1.0.0"
   }
 }
