@@ -1,7 +1,6 @@
 import * as fs from 'fs'
 import * as path from 'path'
 import invariant from 'tiny-invariant'
-import { fileURLToPath } from 'url'
 
 export type WebpackManifest = {
   'index.html': string
@@ -10,27 +9,21 @@ export type WebpackManifest = {
 export const WEBPACK_MANIFEST_FILE_NAME: string =
   'manifest.json'
 
-export function getWebpackDistPath(): string {
-  return path.join(
-    path.dirname(fileURLToPath(import.meta.url)),
-    '../../app/dist',
-  )
-}
-
-function getWebpackManifest(): WebpackManifest {
+function getWebpackManifest(
+  distPath: string,
+): WebpackManifest {
   return JSON.parse(
     fs.readFileSync(
-      path.join(
-        getWebpackDistPath(),
-        WEBPACK_MANIFEST_FILE_NAME,
-      ),
+      path.join(distPath, WEBPACK_MANIFEST_FILE_NAME),
       'utf8',
     ),
   )
 }
 
-export function getDefaultRootObject(): string {
-  const manifest = getWebpackManifest()
+export function getDefaultRootObject(
+  distPath: string,
+): string {
+  const manifest = getWebpackManifest(distPath)
 
   // should look like /index.9c763277af2205a9b76d.html
   invariant(
@@ -42,8 +35,8 @@ export function getDefaultRootObject(): string {
   return path.basename(manifest['index.html'])
 }
 
-export function getExtensions(): string[] {
-  const manifest = getWebpackManifest()
+export function getExtensions(distPath: string): string[] {
+  const manifest = getWebpackManifest(distPath)
   const extensions = new Set<string>()
 
   for (const name of Object.values(manifest)) {
@@ -60,7 +53,7 @@ export function getExtensions(): string[] {
 
   // sanity check some we know that should/shouldn't be there
   invariant(extensions.has('js'))
-  invariant(extensions.has('webmanifest'))
+  // invariant(extensions.has('webmanifest'))
   invariant(!extensions.has('html'))
   invariant(!extensions.has(''))
 

@@ -68,7 +68,9 @@ export class CdnStack extends Stack {
           }),
           viewerProtocolPolicy:
             ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
-          functionAssociations: [defaultToIndexHtml(this)],
+          functionAssociations: [
+            defaultToIndexHtml(this, distPath),
+          ],
           responseHeadersPolicy: new ResponseHeadersPolicy(
             this,
             'ResponseHeadersPolicy',
@@ -90,7 +92,7 @@ export class CdnStack extends Stack {
             },
           ),
         },
-        defaultRootObject: getDefaultRootObject(),
+        defaultRootObject: getDefaultRootObject(distPath),
         domainNames: [domain.app],
         certificate,
       },
@@ -117,9 +119,10 @@ export class CdnStack extends Stack {
 
 function defaultToIndexHtml(
   scope: Construct,
+  distPath: string,
 ): FunctionAssociation {
   // prettier-ignore
-  const ignoreRegex = `/\.(${getExtensions().join('|')})$/`
+  const ignoreRegex = `/\.(${getExtensions(distPath).join('|')})$/`
   return {
     function: new DefaultToIndexHtmlFunction(
       scope,

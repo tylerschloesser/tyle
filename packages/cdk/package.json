@@ -1,6 +1,6 @@
 {
   "name": "@tyle/cdk",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "exports": "./src/index.ts",
   "type": "module",
   "scripts": {
@@ -8,7 +8,8 @@
   },
   "peerDependencies": {
     "aws-cdk-lib": "^2.110.1",
-    "constructs": "^10.3.0"
+    "constructs": "^10.3.0",
+    "tiny-invariant": "^1.3.1"
   },
   "dependencies": {
     "@tyle/tsconfig": "^1.0.0"
