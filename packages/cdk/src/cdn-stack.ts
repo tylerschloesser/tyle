@@ -1,6 +1,7 @@
 import { Stack } from 'aws-cdk-lib'
 import { Certificate } from 'aws-cdk-lib/aws-certificatemanager'
 import {
+  BehaviorOptions,
   Distribution,
   FunctionAssociation,
   FunctionEventType,
@@ -33,6 +34,7 @@ export interface CdnStackProps extends CommonStackProps {
   certificate: Certificate
   appHostedZone: HostedZone
   distPath: string
+  additionalBehaviors?: Record<string, BehaviorOptions>
 }
 
 export class CdnStack extends Stack {
@@ -44,6 +46,7 @@ export class CdnStack extends Stack {
       certificate,
       appHostedZone,
       distPath,
+      additionalBehaviors,
       ...props
     }: CdnStackProps,
   ) {
@@ -92,6 +95,7 @@ export class CdnStack extends Stack {
             },
           ),
         },
+        additionalBehaviors,
         defaultRootObject: getDefaultRootObject(distPath),
         domainNames: [domain.app],
         certificate,
