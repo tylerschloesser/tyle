@@ -1,10 +1,11 @@
-import { App, AppProps } from 'aws-cdk-lib'
+import { App } from 'aws-cdk-lib'
+import { Construct } from 'constructs'
 import { CdnCertificateStack } from './cdn-certificate-stack.js'
 import { CdnStack } from './cdn-stack.js'
 import { DnsStack } from './dns-stack.js'
 import { Domain, Region } from './types.js'
 
-export interface WebAppV1Props extends AppProps {
+export interface WebAppV1Props {
   stackIdPrefix: string
   account: string
   domain: Domain
@@ -12,22 +13,25 @@ export interface WebAppV1Props extends AppProps {
   distPath: string
 }
 
-export class WebAppV1 extends App {
+export class WebAppV1 extends Construct {
   readonly stack: Readonly<{
     dns: DnsStack
     cdnCertificate: CdnCertificateStack
     cdn: CdnStack
   }>
 
-  constructor({
-    stackIdPrefix,
-    account,
-    domain,
-    region,
-    distPath,
-    ...props
-  }: WebAppV1Props) {
-    super(props)
+  constructor(
+    scope: App,
+    id: string,
+    {
+      stackIdPrefix,
+      account,
+      domain,
+      region,
+      distPath,
+    }: WebAppV1Props,
+  ) {
+    super(scope, id)
 
     const stackId = (suffix: string) =>
       [stackIdPrefix, suffix].join('-')
