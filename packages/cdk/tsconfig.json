@@ -1,0 +1,6 @@
+{
+  "extends": "@tsch/tsconfig",
+  "compilerOptions": {
+    "types": ["node"]
+  }
+}

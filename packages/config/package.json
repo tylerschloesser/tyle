@@ -1,0 +1,8 @@
+{
+  "name": "@tsch/config",
+  "version": "1.0.0",
+  "type": "module",
+  "files": [
+    "./prettier.config.cjs"
+  ]
+}
