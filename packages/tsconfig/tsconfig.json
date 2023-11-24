@@ -11,6 +11,7 @@
     "noUncheckedIndexedAccess": true
   },
   "ts-node": {
-    "esm": true
+    "esm": true,
+    "ignore": ["(?:^|/)node_modules/(?!@tyle/)"]
   }
 }
