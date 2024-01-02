@@ -5,6 +5,11 @@ import { Configuration } from 'webpack'
 import 'webpack-dev-server'
 import { WebpackManifestPlugin } from 'webpack-manifest-plugin'
 
+const htmlTemplatePath = path.join(
+  url.fileURLToPath(new URL('.', import.meta.url)),
+  './index.html',
+)
+
 export function webpackConfig(): (
   _env: unknown,
   argv: { mode: Configuration['mode'] },
@@ -75,18 +80,13 @@ export function webpackConfig(): (
           filename: prod
             ? 'index.[contenthash].html'
             : 'index.html',
-          template: path.join(
-            url.fileURLToPath(
-              new URL('.', import.meta.url),
-            ),
-            './index.html',
-          ),
+          template: htmlTemplatePath,
         }),
         new WebpackManifestPlugin({}),
       ],
       devServer: {
         hot: false,
-        watchFiles: ['./src/index.html'],
+        watchFiles: [htmlTemplatePath],
         historyApiFallback: true,
         allowedHosts: ['.amazonaws.com', '.slg.dev'],
         client: {
