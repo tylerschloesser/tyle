@@ -10,7 +10,11 @@ const htmlTemplatePath = path.join(
   './index.html',
 )
 
-export function webpackConfig(): (
+export function webpackConfig({
+  head,
+}: {
+  head?: string
+}): (
   _env: unknown,
   argv: { mode: Configuration['mode'] },
 ) => Configuration {
@@ -81,6 +85,9 @@ export function webpackConfig(): (
             ? 'index.[contenthash].html'
             : 'index.html',
           template: htmlTemplatePath,
+          templateParameters: {
+            head,
+          },
         }),
         new WebpackManifestPlugin({}),
       ],
