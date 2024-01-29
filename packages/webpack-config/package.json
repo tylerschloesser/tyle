@@ -1,6 +1,6 @@
 {
   "name": "@tyle/webpack-config",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "type": "module",
   "exports": "./index.ts",
   "peerDependencies": {
@@ -11,6 +11,7 @@
     "@tyle/tsconfig": "^1.0.0",
     "css-loader": "^6.8.1",
     "html-webpack-plugin": "^5.5.3",
+    "mini-css-extract-plugin": "^2.7.7",
     "postcss-loader": "^7.3.3",
     "postcss-preset-env": "^9.3.0",
     "sass": "^1.69.5",

@@ -1,4 +1,5 @@
 import HtmlWebpackPlugin from 'html-webpack-plugin'
+import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import * as path from 'path'
 import * as url from 'url'
 import { Configuration } from 'webpack'
@@ -45,7 +46,9 @@ export function webpackConfig({
           {
             test: /\.s[ac]ss$/i,
             use: [
-              'style-loader',
+              prod
+                ? MiniCssExtractPlugin.loader
+                : 'style-loader',
               {
                 loader: 'css-loader',
                 options: {
@@ -90,6 +93,10 @@ export function webpackConfig({
           },
         }),
         new WebpackManifestPlugin({}),
+        prod &&
+          new MiniCssExtractPlugin({
+            filename: '[name].[contenthash].css',
+          }),
       ],
       devServer: {
         hot: false,
