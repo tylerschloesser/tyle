@@ -107,7 +107,9 @@ export function webpackConfig({
       devServer: {
         hot: false,
         watchFiles: [htmlTemplatePath],
-        historyApiFallback: true,
+        historyApiFallback: {
+          disableDotRule: true,
+        },
         allowedHosts: ['.amazonaws.com', '.slg.dev'],
         client: {
           webSocketURL: 'auto://0.0.0.0:0/ws',
