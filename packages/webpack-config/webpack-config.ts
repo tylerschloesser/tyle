@@ -40,7 +40,13 @@ export function webpackConfig({
         rules: [
           {
             test: /\.[tj]sx?$/,
-            use: 'ts-loader',
+            use: {
+              loader: 'ts-loader',
+              options: {
+                // easy way to ignore storybook files
+                onlyCompileBundledFiles: true,
+              },
+            },
             exclude: /node_modules/,
           },
           {
