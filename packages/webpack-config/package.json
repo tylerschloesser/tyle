@@ -1,11 +1,11 @@
 {
   "name": "@tyle/webpack-config",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "type": "module",
   "exports": "./index.ts",
   "peerDependencies": {
-    "webpack": "^5.89.0",
-    "webpack-dev-server": "^4.15.1"
+    "webpack": "^5.90.3",
+    "webpack-dev-server": "^5.0.2"
   },
   "dependencies": {
     "@tyle/tsconfig": "^1.0.0",
