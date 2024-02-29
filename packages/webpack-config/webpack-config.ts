@@ -79,10 +79,9 @@ export function webpackConfig(): (
           {
             test: /\.webmanifest$/,
             type: 'asset/resource',
-          },
-          {
-            test: /\.glsl$/,
-            type: 'asset/source',
+            generator: {
+              filename: '[file]',
+            },
           },
         ],
       },
