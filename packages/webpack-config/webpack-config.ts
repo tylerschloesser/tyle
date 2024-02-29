@@ -1,3 +1,4 @@
+import CopyWebpackPlugin from 'copy-webpack-plugin'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import * as path from 'path'
@@ -103,6 +104,13 @@ export function webpackConfig({
           new MiniCssExtractPlugin({
             filename: '[name].[contenthash].css',
           }),
+        new CopyWebpackPlugin({
+          patterns: [
+            {
+              from: 'app.webmanifest',
+            },
+          ],
+        }),
       ],
       devServer: {
         hot: false,
