@@ -29,7 +29,10 @@ export function webpackConfig(): (
       output: {
         filename: '[name].[contenthash].js',
         chunkFilename: '[name].[contenthash].chunk.js',
-        clean: true,
+        clean: {
+          // not sure why, but this gets deleted after dev server recompile
+          keep: 'app.webmanifest',
+        },
         publicPath: '/',
       },
       module: {
