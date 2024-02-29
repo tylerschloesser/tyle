@@ -77,6 +77,10 @@ export function webpackConfig(): (
             loader: 'html-loader',
           },
           {
+            test: /\.webmanifest$/,
+            type: 'asset/resource',
+          },
+          {
             test: /\.glsl$/,
             type: 'asset/source',
           },
@@ -87,6 +91,7 @@ export function webpackConfig(): (
         extensionAlias: {
           '.js': ['.ts', '.tsx', '.js'],
         },
+        roots: ['.'],
       },
       plugins: [
         new HtmlWebpackPlugin({
