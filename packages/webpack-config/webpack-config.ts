@@ -12,11 +12,7 @@ const htmlTemplatePath = path.join(
   './index.html',
 )
 
-export function webpackConfig({
-  head,
-}: {
-  head?: string
-}): (
+export function webpackConfig(): (
   _env: unknown,
   argv: { mode: Configuration['mode'] },
 ) => Configuration {
@@ -78,6 +74,10 @@ export function webpackConfig({
             ],
           },
           {
+            test: /\.html$/i,
+            loader: 'html-loader',
+          },
+          {
             test: /\.glsl$/,
             type: 'asset/source',
           },
@@ -95,22 +95,12 @@ export function webpackConfig({
             ? 'index.[contenthash].html'
             : 'index.html',
           template: htmlTemplatePath,
-          templateParameters: {
-            head,
-          },
         }),
         new WebpackManifestPlugin({}),
         prod &&
           new MiniCssExtractPlugin({
             filename: '[name].[contenthash].css',
           }),
-        new CopyWebpackPlugin({
-          patterns: [
-            {
-              from: 'app.webmanifest',
-            },
-          ],
-        }),
       ],
       devServer: {
         hot: false,
