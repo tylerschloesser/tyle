@@ -91,7 +91,6 @@ export function webpackConfig(): (
         extensionAlias: {
           '.js': ['.ts', '.tsx', '.js'],
         },
-        roots: ['.'],
       },
       plugins: [
         new HtmlWebpackPlugin({
